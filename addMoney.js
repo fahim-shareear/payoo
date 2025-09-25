@@ -30,7 +30,18 @@ function toggleButtons(id){
     };
 
     document.getElementById(id).style.display = 'block';
-}
+};
+
+function handleButonToggle(id){
+    const formBtn = document.getElementsByClassName('card');
+    for(const btn of formBtn){
+        btn.classList.remove('border-[#0874f2]', 'bg-[#0874f20d]')
+        btn.classList.add("border-[#0808081A]");
+    };
+
+    document.getElementById('id').classList.remove("border-[#0808081A]")
+    document.getElementById('id').classList.add("border-[#0874f2]", "bg-[#0874f20d]");
+};
 
 addMoney.addEventListener('click', function(e){
     e.preventDefault();
@@ -130,51 +141,23 @@ getBonus.addEventListener('click', function(e){
 //toggle button feature
 document.getElementById('addSection').addEventListener('click', function(e){
     toggleButtons('addSectionOne');
-    const formBtn = document.getElementsByClassName('card');
-    for(const btn of formBtn){
-        btn.classList.remove('border-[#0874f2]', 'bg-[#0874f20d]')
-        btn.classList.add("border-[#0808081A]");
-    };
-
-    document.getElementById('addSection').classList.remove("border-[#0808081A]")
-    document.getElementById('addSection').classList.add("border-[#0874f2]", "bg-[#0874f20d]");
+    handleButonToggle('addSection');
 });
 
 
 document.getElementById('cashSection').addEventListener('click', function(e){
     toggleButtons('cashOut');
-    const formBtn = document.getElementsByClassName('card');
-    for(const btn of formBtn){
-        btn.classList.remove('border-[#0874f2]', 'bg-[#0874f20d]');
-        btn.classList.add("border-[#0808081A]");
-    };
-
-    document.getElementById('cashSection').classList.remove("border-[#0808081A]")
-    document.getElementById('cashSection').classList.add("border-[#0874f2]", "bg-[#0874f20d]");
+    handleButonToggle('cashOut');
 });
 
 document.getElementById('transferSection').addEventListener('click', function(e){
     toggleButtons('transfer');
-    const formBtn = document.getElementsByClassName('card');
-    for(const btn of formBtn){
-        btn.classList.remove('border-[#0874f2]', 'bg-[#0874f20d]');
-        btn.classList.add("border-[#0808081A]");
-    };
-
-    document.getElementById('transferSection').classList.remove("border-[#0808081A]")
-    document.getElementById('transferSection').classList.add("border-[#0874f2]", "bg-[#0874f20d]");
+    handleButonToggle('transfer');
 });
 
 document.getElementById('bonusSection').addEventListener('click', function(e){
     toggleButtons('bonus');
-    const formBtn = document.getElementsByClassName('card');
-    for(const btn of formBtn){
-        btn.classList.remove('border-[#0874f2]', 'bg-[#0874f20d]');
-        btn.classList.add("border-[#0808081A]");
-    };
-
-    document.getElementById('bonusSection').classList.remove("border-[#0808081A]")
-    document.getElementById('bonusSection').classList.add("border-[#0874f2]", "bg-[#0874f20d]");
+    handleButonToggle('bonus');
 });
 
 //Log out button code
