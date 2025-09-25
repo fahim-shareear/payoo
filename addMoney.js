@@ -4,6 +4,7 @@ const withdrawMoney = document.getElementById('btnWithdraw');
 const transferMoney = document.getElementById('btnTransfer');
 const getBonus = document.getElementById('btnBonus');
 const payBill = document.getElementById('payButton');
+const transactionHistory = [];
 
 // helpers
 function getInputValue(id){ return parseInt(document.getElementById(id).value); }
@@ -51,6 +52,15 @@ addMoney.addEventListener('click', function(e){
     if(bankNumber.length < 11){ alert("Please Provide correct Bank Number"); return; }
     if(addPin !== validPin){ alert('Incorrect Pin'); return; }
     getInnerText(mainBalance + addAmount);
+
+
+    const data = {
+        name: "Add Money",
+        date: new Date().toLocaleTimeString()
+    };
+
+    transactionHistory.push(data);
+    console.log(transactionHistory);
 });
 
 withdrawMoney.addEventListener('click', function(e){
@@ -63,6 +73,13 @@ withdrawMoney.addEventListener('click', function(e){
     if(pin !== validPin){ alert('Please enter Correct Pin Number'); return; }
     if(amount > balance){ alert('Insufficient Balance'); return; }
     getInnerText(balance - amount);
+
+    const data = {
+        name: "Add Money",
+        date: new Date().toLocaleTimeString()
+    };
+
+    transactionHistory.push(data);
 });
 
 transferMoney.addEventListener('click', function(e){
@@ -75,6 +92,13 @@ transferMoney.addEventListener('click', function(e){
     if(pin !== validPin){ alert('Please enter Correct Pin Number'); return; }
     if(amount > balance){ alert('Insufficient Balance'); return; }
     getInnerText(balance - amount);
+
+    const data = {
+        name: "Add Money",
+        date: new Date().toLocaleTimeString()
+    };
+
+    transactionHistory.push(data);
 });
 
 getBonus.addEventListener('click', function(e){
@@ -85,6 +109,13 @@ getBonus.addEventListener('click', function(e){
     const randomBonus = Math.floor(Math.random() * 9001) + 1000;
     getInnerText(balance + randomBonus);
     alert(`🎉 Congrats! You received a bonus of ${randomBonus}`);
+
+    const data = {
+        name: "Add Money",
+        date: new Date().toLocaleTimeString()
+    };
+
+    transactionHistory.push(data);
 });
 
 payBill.addEventListener('click', function(e){
@@ -97,6 +128,13 @@ payBill.addEventListener('click', function(e){
     if(pin !== validPin){ alert('Incorrect Pin'); return; }
     if(amount > balance){ alert('Insufficient Balance'); return; }
     getInnerText(balance - amount);
+
+    const data = {
+        name: "Add Money",
+        date: new Date().toLocaleTimeString()
+    };
+
+    transactionHistory.push(data);
 });
 
 /* --------- toggles --------- */
