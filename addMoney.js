@@ -116,6 +116,10 @@ document.getElementById('payBillSection').addEventListener('click', () => {
     toggleButtons('payBill'); handleButonToggle('payBillSection');
 });
 
+document.getElementById('transactionSection').addEventListener('click', () => {
+    toggleButtons('transactionHistory'); handleButonToggle('transactionSection');
+});
+
 /* --------- logout --------- */
 document.getElementById('logOut').addEventListener('click', () => {
     window.location.href = './index.html';

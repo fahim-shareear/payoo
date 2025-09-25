@@ -63,7 +63,7 @@
         <p class="p-2 text-[13px]">Pay Bill</p>
     </div>
 
-    <div class="card text-center border-1 border-[#0808081A] rounded-xl w-[123px] h-[90px] bg-[#0808081A] flex justify-center items-center mx-auto">
+    <div class="card text-center border-1 border-[#0808081A] rounded-xl w-[123px] h-[90px] bg-[#0808081A] flex justify-center items-center mx-auto" id="transactionSection">
         <img src="./assets/transaction1.png" alt="" class="mx-auto w-[30px] h-[30px] m-2">
         <p class="p-2 text-[13px]">Transaction</p>
     </div>
@@ -189,6 +189,17 @@
 
           <button class="btn-bottom mx-auto" id="payButton">Pay Bill</button>
         </form>
+     </div>
+
+     <!-- adding transaction history section -->
+     <div class="transaction_history form" id="transactionHistory">
+      <div class="flex justify-between items-center">
+        <h1 class="font-semibold mb-[18px] ml-[10px] text-[20px]">Transaction History</h1>
+        <p class="text-[#08080880]">View All</p>
+      </div>
+      <div class="bg-[white] rounded-2xl p-8 h-[370px] overflow-x-auto">
+
+      </div>
      </div>
 </div>
 <script src="addMoney.js"></script>
