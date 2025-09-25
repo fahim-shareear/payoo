@@ -158,6 +158,11 @@ payButton.addEventListener('click', function(e){
         return;
     };
 
+    if(payAmount > mainBalance){
+        alert('Insufficient Balance');
+        return;
+    };
+
     const total = mainBalance - payAmount;
     getInnerText(total);
 });
