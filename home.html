@@ -58,7 +58,7 @@
         <p class="p-2 text-[13px]">Get Bonus</p>
     </div>
 
-    <div class="card text-center border-1 border-[#0808081A] rounded-xl w-[123px] h-[90px] bg-[#0808081A] flex justify-center items-center mx-auto">
+    <div class="card text-center border-1 border-[#0808081A] rounded-xl w-[123px] h-[90px] bg-[#0808081A] flex justify-center items-center mx-auto" id="payBillSection">
         <img src="./assets/purse1.png" alt="" class="mx-auto w-[30px] h-[30px] m-2">
         <p class="p-2 text-[13px]">Pay Bill</p>
     </div>
@@ -157,6 +157,37 @@
           </div>
 
           <button class="btn-bottom mx-auto" id="btnBonus">Get Bonus</button>
+        </form>
+     </div>
+
+     <!-- pay bill section -->
+      <div class="pay_bill form" id="payBill">
+        <h1 class="font-semibold mb-[18px] ml-[10px] text-[20px]">Pay Bill</h1>
+        <form action="" class="bg-white rounded-2xl p-8 h-[510px]">
+          <div>
+            <h1 class="mb-[10px] font-semibold">Select to pay</h1>
+            <select class="select bg-white rounded-8xl p-3 m-[10px]" id="bill">
+                  <option selected>Select Bill To Pay</option>
+                  <option>Electricity Bill</option>
+                  <option>Water Bill</option>
+                  <option>Internet Bill</option>
+                  <option>Grocessary Bill</option>
+            </select>
+          </div>
+          <div>
+            <label for="accnumber" class="acnum font-semibold m-[10px]">Biller Account Number</label> <br>
+            <input type="text" placeholder="Enter 11 digit Acoount Number" class="accnumber" id="payAdd">
+          </div>
+          <div>
+            <label for="" class="acnum font-semibold" >Amount to Pay</label> <br>
+            <input type="text" placeholder="Ad Amount to Withdraw" class="accnumber" id="pay-amount">
+          </div>
+          <div>
+            <label for="" class="acnum font-semibold" >Pin Number</label> <br>
+            <input type="text" placeholder="Enter 4 digit pin number" class="accnumber" id="payPin">
+          </div>
+
+          <button class="btn-bottom mx-auto" id="payButton">Pay Bill</button>
         </form>
      </div>
 </div>

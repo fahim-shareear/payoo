@@ -3,6 +3,7 @@ const validPin = 1234;
 const withdrawMoney = document.getElementById('btnWithdraw');
 const transferMoney = document.getElementById('btnTransfer');
 const getBonus = document.getElementById('btnBonus');
+const payBill = document.getElementById('payButton');
 
 
 
@@ -39,8 +40,8 @@ function handleButonToggle(id){
         btn.classList.add("border-[#0808081A]");
     };
 
-    document.getElementById('id').classList.remove("border-[#0808081A]")
-    document.getElementById('id').classList.add("border-[#0874f2]", "bg-[#0874f20d]");
+    document.getElementById(id).classList.remove("border-[#0808081A]")
+    document.getElementById(id).classList.add("border-[#0874f2]", "bg-[#0874f20d]");
 };
 
 addMoney.addEventListener('click', function(e){
@@ -119,7 +120,29 @@ transferMoney.addEventListener('click', function(e){
 
     const availableBalance = transferBalance - transferMoney;
     getInnerText(availableBalance);
-})
+});
+
+payButton.addEventListener('click', function(e){
+    e.preventDefault();
+    const getBill = document.getElementById('bill');
+    const billAccount = getValue('payAdd');
+    const payAmount = getInputValue('pay-amount');
+    const payPin = getInputValue('payPin');
+    const mainBalance = parseInt(document.getElementById('balance').innerText);
+
+    if(billAccount.length < 11){
+        alert("Please Provide correct Account Number");
+        return;
+    };
+
+    if(payPin !== validPin){
+        alert('Incorrect Pin');
+        return;
+    };
+
+    const total = mainBalance - payAmount;
+    getInnerText(total);
+});
 
 getBonus.addEventListener('click', function(e){
     e.preventDefault();
@@ -147,17 +170,22 @@ document.getElementById('addSection').addEventListener('click', function(e){
 
 document.getElementById('cashSection').addEventListener('click', function(e){
     toggleButtons('cashOut');
-    handleButonToggle('cashOut');
+    handleButonToggle('cashSection');
 });
 
 document.getElementById('transferSection').addEventListener('click', function(e){
     toggleButtons('transfer');
-    handleButonToggle('transfer');
+    handleButonToggle('transferSection');
 });
 
 document.getElementById('bonusSection').addEventListener('click', function(e){
     toggleButtons('bonus');
-    handleButonToggle('bonus');
+    handleButonToggle('bonusSection');
+});
+
+document.getElementById('payBillSection').addEventListener('click', function(e){
+    toggleButtons('payBill');
+    handleButonToggle('payBillSection');
 });
 
 //Log out button code
