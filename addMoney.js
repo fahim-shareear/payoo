@@ -5,197 +5,118 @@ const transferMoney = document.getElementById('btnTransfer');
 const getBonus = document.getElementById('btnBonus');
 const payBill = document.getElementById('payButton');
 
+// helpers
+function getInputValue(id){ return parseInt(document.getElementById(id).value); }
+function getValue(id){ return document.getElementById(id).value; }
+function getInnerText(value){ document.getElementById('balance').innerText = value; }
 
-
-function getInputValue(id){
-    const mainInputValue = parseInt(document.getElementById(id).value);
-    return mainInputValue;
-};
-
-function getValue(id){
-    const value = document.getElementById(id).value;
-    return value;
-}
-
-function getInnerText(value){
-    const innerText = document.getElementById('balance');
-    innerText.innerText = value;
-};
-
-
-//toggle button
+// toggle with animation
 function toggleButtons(id){
     const forms = document.getElementsByClassName('form');
     for(const form of forms){
-        form.style.display = 'none';
-    };
+        if(form.classList.contains('active')){
+            form.classList.remove('active');
+            form.classList.add('hide');
+            setTimeout(() => {
+                form.classList.remove('show','hide');
+                form.style.display = 'none';
+            }, 400);
+        }
+    }
+    const target = document.getElementById(id);
+    target.style.display = 'block';
+    target.classList.add('show');
+    setTimeout(() => target.classList.add('active'), 10);
+}
 
-    document.getElementById(id).style.display = 'block';
-};
-
+// highlight card
 function handleButonToggle(id){
     const formBtn = document.getElementsByClassName('card');
     for(const btn of formBtn){
-        btn.classList.remove('border-[#0874f2]', 'bg-[#0874f20d]')
+        btn.classList.remove('border-[#0874f2]', 'bg-[#0874f20d]');
         btn.classList.add("border-[#0808081A]");
-    };
+    }
+    const target = document.getElementById(id);
+    target.classList.remove("border-[#0808081A]");
+    target.classList.add("border-[#0874f2]", "bg-[#0874f20d]");
+}
 
-    document.getElementById(id).classList.remove("border-[#0808081A]")
-    document.getElementById(id).classList.add("border-[#0874f2]", "bg-[#0874f20d]");
-};
-
+/* --------- your money logic (unchanged) --------- */
 addMoney.addEventListener('click', function(e){
     e.preventDefault();
-    const getBank = document.getElementById('bank');
     const bankNumber = getValue('bankAdd');
     const addAmount = getInputValue('add-amount');
     const addPin = getInputValue('pinNumber');
     const mainBalance = parseInt(document.getElementById('balance').innerText);
-
-    if(bankNumber.length < 11){
-        alert("Please Provide correct Bank Number");
-        return;
-    };
-
-    if(addPin !== validPin){
-        alert('Incorrect Pin');
-        return;
-    };
-
-    const total = mainBalance + addAmount;
-    getInnerText(total);
+    if(bankNumber.length < 11){ alert("Please Provide correct Bank Number"); return; }
+    if(addPin !== validPin){ alert('Incorrect Pin'); return; }
+    getInnerText(mainBalance + addAmount);
 });
-
 
 withdrawMoney.addEventListener('click', function(e){
     e.preventDefault();
-    const getAgentNumber = getValue('agent');
-    const withdrawMoney = getInputValue('remove-amount');
-    const withdrawpin = getInputValue('pinWithdraw');
-    const mainbalance = parseInt(document.getElementById('balance').innerText);
-
-    if(getAgentNumber.length < 11){
-        alert('Please provide correct Agent Number');
-        return;
-    };
-
-    if(withdrawpin !== validPin){
-        alert('Please enter Correct Pin Number');
-        return;
-    };
-
-    if(withdrawMoney > mainbalance){
-        alert('Insufficient Balance');
-        return;
-    };
-
-    const balance = mainbalance - withdrawMoney;
-    getInnerText(balance);
+    const agent = getValue('agent');
+    const amount = getInputValue('remove-amount');
+    const pin = getInputValue('pinWithdraw');
+    const balance = parseInt(document.getElementById('balance').innerText);
+    if(agent.length < 11){ alert('Please provide correct Agent Number'); return; }
+    if(pin !== validPin){ alert('Please enter Correct Pin Number'); return; }
+    if(amount > balance){ alert('Insufficient Balance'); return; }
+    getInnerText(balance - amount);
 });
-
-
 
 transferMoney.addEventListener('click', function(e){
     e.preventDefault();
-    const getAccountNumber = getValue('user');
-    const transferMoney = getInputValue('send-amount');
-    const transferPin = getInputValue('pinTransfer');
-    const transferBalance = parseInt(document.getElementById('balance').innerText);
-
-
-    if(getAccountNumber.length < 11){
-        alert('Please provide correct Agent Number');
-        return;
-    };
-
-    if(transferPin !== validPin){
-        alert('Please enter Correct Pin Number');
-        return;
-    };
-
-    if(transferMoney > transferBalance){
-        alert('Insufficient Balance');
-        return;
-    };
-
-    const availableBalance = transferBalance - transferMoney;
-    getInnerText(availableBalance);
+    const acc = getValue('user');
+    const amount = getInputValue('send-amount');
+    const pin = getInputValue('pinTransfer');
+    const balance = parseInt(document.getElementById('balance').innerText);
+    if(acc.length < 11){ alert('Please provide correct Account Number'); return; }
+    if(pin !== validPin){ alert('Please enter Correct Pin Number'); return; }
+    if(amount > balance){ alert('Insufficient Balance'); return; }
+    getInnerText(balance - amount);
 });
-
 
 getBonus.addEventListener('click', function(e){
     e.preventDefault();
-    const getCuponNumber = getValue('cupon');
-    const couponBalance = parseInt(document.getElementById('balance').innerText);
-
-    if(getCuponNumber.length < 8 || isNaN(getCuponNumber)){
-        alert('Please Provide Corrct Cupon Number');
-        return;
-    };
-
+    const cupon = getValue('cupon');
+    const balance = parseInt(document.getElementById('balance').innerText);
+    if(cupon.length < 8 || isNaN(cupon)){ alert('Please Provide Correct Coupon Number'); return; }
     const randomBonus = Math.floor(Math.random() * 9001) + 1000;
-    const newBalance = couponBalance + randomBonus;
-
-    getInnerText(newBalance);
+    getInnerText(balance + randomBonus);
     alert(`🎉 Congrats! You received a bonus of ${randomBonus}`);
 });
 
-payButton.addEventListener('click', function(e){
+payBill.addEventListener('click', function(e){
     e.preventDefault();
-    const getBill = document.getElementById('bill');
     const billAccount = getValue('payAdd');
-    const payAmount = getInputValue('pay-amount');
-    const payPin = getInputValue('payPin');
-    const mainBalance = parseInt(document.getElementById('balance').innerText);
-
-    if(billAccount.length < 11){
-        alert("Please Provide correct Account Number");
-        return;
-    };
-
-    if(payPin !== validPin){
-        alert('Incorrect Pin');
-        return;
-    };
-
-    if(payAmount > mainBalance){
-        alert('Insufficient Balance');
-        return;
-    };
-
-    const total = mainBalance - payAmount;
-    getInnerText(total);
+    const amount = getInputValue('pay-amount');
+    const pin = getInputValue('payPin');
+    const balance = parseInt(document.getElementById('balance').innerText);
+    if(billAccount.length < 11){ alert("Please Provide correct Account Number"); return; }
+    if(pin !== validPin){ alert('Incorrect Pin'); return; }
+    if(amount > balance){ alert('Insufficient Balance'); return; }
+    getInnerText(balance - amount);
 });
 
-//toggle button feature
-document.getElementById('addSection').addEventListener('click', function(e){
-    toggleButtons('addSectionOne');
-    handleButonToggle('addSection');
+/* --------- toggles --------- */
+document.getElementById('addSection').addEventListener('click', () => {
+    toggleButtons('addSectionOne'); handleButonToggle('addSection');
+});
+document.getElementById('cashSection').addEventListener('click', () => {
+    toggleButtons('cashOut'); handleButonToggle('cashSection');
+});
+document.getElementById('transferSection').addEventListener('click', () => {
+    toggleButtons('transfer'); handleButonToggle('transferSection');
+});
+document.getElementById('bonusSection').addEventListener('click', () => {
+    toggleButtons('bonus'); handleButonToggle('bonusSection');
+});
+document.getElementById('payBillSection').addEventListener('click', () => {
+    toggleButtons('payBill'); handleButonToggle('payBillSection');
 });
 
-
-document.getElementById('cashSection').addEventListener('click', function(e){
-    toggleButtons('cashOut');
-    handleButonToggle('cashSection');
-});
-
-document.getElementById('transferSection').addEventListener('click', function(e){
-    toggleButtons('transfer');
-    handleButonToggle('transferSection');
-});
-
-document.getElementById('bonusSection').addEventListener('click', function(e){
-    toggleButtons('bonus');
-    handleButonToggle('bonusSection');
-});
-
-document.getElementById('payBillSection').addEventListener('click', function(e){
-    toggleButtons('payBill');
-    handleButonToggle('payBillSection');
-});
-
-//Log out button code
-const logInBtn = document.getElementById('logOut');
-logInBtn.addEventListener('click', function(){
+/* --------- logout --------- */
+document.getElementById('logOut').addEventListener('click', () => {
     window.location.href = './index.html';
 });
