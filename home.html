@@ -193,14 +193,15 @@
 
      <!-- adding transaction history section -->
      <div class="transaction_history form" id="transactionHistory">
-      <div class="flex justify-between items-center">
-        <h1 class="font-semibold mb-[18px] ml-[10px] text-[20px]">Transaction History</h1>
-        <p class="text-[#08080880]">View All</p>
+      <div class="flex justify-between items-center mb-2">
+        <h1 class="font-semibold text-[20px]">Transaction History</h1>
+        <button id="viewAllBtn" class="text-[#08080880] cursor-pointer">View All</button>
       </div>
-      <div class="bg-[white] rounded-2xl p-8 h-[330px] overflow-x-auto">
+      <div class="rounded-2xl p-4 h-[330px] overflow-y-auto transition-all duration-300" id="historyContainer">
+        <div id="historyList"></div>
+      </div>
+    </div>
 
-      </div>
-     </div>
 </div>
 <script src="addMoney.js"></script>
 </body>
