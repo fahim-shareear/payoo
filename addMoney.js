@@ -122,6 +122,24 @@ transferMoney.addEventListener('click', function(e){
     getInnerText(availableBalance);
 });
 
+
+getBonus.addEventListener('click', function(e){
+    e.preventDefault();
+    const getCuponNumber = getValue('cupon');
+    const couponBalance = parseInt(document.getElementById('balance').innerText);
+
+    if(getCuponNumber.length < 8 || isNaN(getCuponNumber)){
+        alert('Please Provide Corrct Cupon Number');
+        return;
+    };
+
+    const randomBonus = Math.floor(Math.random() * 9001) + 1000;
+    const newBalance = couponBalance + randomBonus;
+
+    getInnerText(newBalance);
+    alert(`🎉 Congrats! You received a bonus of ${randomBonus}`);
+});
+
 payButton.addEventListener('click', function(e){
     e.preventDefault();
     const getBill = document.getElementById('bill');
@@ -142,23 +160,6 @@ payButton.addEventListener('click', function(e){
 
     const total = mainBalance - payAmount;
     getInnerText(total);
-});
-
-getBonus.addEventListener('click', function(e){
-    e.preventDefault();
-    const getCuponNumber = getValue('cupon');
-    const couponBalance = parseInt(document.getElementById('balance').innerText);
-
-    if(getCuponNumber.length < 8 || isNaN(getCuponNumber)){
-        alert('Please Provide Corrct Cupon Number');
-        return;
-    };
-
-    const randomBonus = Math.floor(Math.random() * 9001) + 1000;
-    const newBalance = couponBalance + randomBonus;
-
-    getInnerText(newBalance);
-    alert(`🎉 Congrats! You received a bonus of ${randomBonus}`);
 });
 
 //toggle button feature
