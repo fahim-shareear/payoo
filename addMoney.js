@@ -104,7 +104,7 @@ transferMoney.addEventListener('click', function(e){
 
     if(acc.length < 11){ alert('Please provide correct Account Number'); return; }
     if(pin !== validPin){ alert('Please enter Correct Pin Number'); return; }
-    if(amount > balance){ alert('Insufficient Balance'); return; }
+    if(amount > balance){ alert('Insufficient Balance'); return; };
 
     getInnerText(balance - amount);
 
