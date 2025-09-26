@@ -63,6 +63,11 @@ addMoney.addEventListener('click', function(e){
     const mainBalance = parseInt(document.getElementById('balance').innerText);
 
     if(bankNumber.length < 11){ alert("Please Provide correct Bank Number"); return; }
+    if(addAmount <= 20){
+        alert("You can not add less than 20 Taka");
+        return;
+    };
+
     if(addPin !== validPin){ alert('Incorrect Pin'); return; }
 
     getInnerText(mainBalance + addAmount);
@@ -77,9 +82,13 @@ withdrawMoney.addEventListener('click', function(e){
     const pin = getInputValue('pinWithdraw');
     const balance = parseInt(document.getElementById('balance').innerText);
 
-    if(agent.length < 11){ alert('Please provide correct Agent Number'); return; }
-    if(pin !== validPin){ alert('Please enter Correct Pin Number'); return; }
-    if(amount > balance){ alert('Insufficient Balance'); return; }
+    if(agent.length < 11){ alert('Please provide correct Agent Number'); return; };
+    if(amount <= 0){alert('You must put more than 0 amount'); return;};
+    if(pin !== validPin){ alert('Please enter Correct Pin Number'); return; };
+    if(amount > balance){ alert('Insufficient Balance'); return; }else if(amount <= 0){
+        alert('Invalid Amount');
+        return;
+    };
 
     getInnerText(balance - amount);
 
